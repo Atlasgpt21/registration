@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $id = member_create($DB, $data);
         flash_set('success', 'Το μέλος καταχωρήθηκε.');
-        redirect('member_view.php?id=' . $id);
+        redirect('member_view.php?id=' . $id . '&print=1');
     }
 }
 

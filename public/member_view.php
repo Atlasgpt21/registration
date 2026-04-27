@@ -23,6 +23,7 @@ layout_header('Προβολή Μέλους', 'members');
         <?php endif; ?>
     </div>
     <div>
+        <a href="member_registration_print.php?id=<?= $id ?>" target="_blank" class="btn btn-info btn-sm text-white"><i class="bi bi-printer me-1"></i>Φόρμα Εγγραφής</a>
         <a href="member_edit.php?id=<?= $id ?>" class="btn btn-warning btn-sm"><i class="bi bi-pencil me-1"></i>Επεξεργασία</a>
         <form method="post" action="member_delete.php" class="d-inline" onsubmit="return confirm('Διαγραφή αυτού του μέλους;')">
             <?= csrf_field() ?>
@@ -126,5 +127,9 @@ layout_header('Προβολή Μέλους', 'members');
         </dl>
     </div>
 </div>
+
+<?php if (isset($_GET['print']) && $_GET['print'] === '1'): ?>
+<script>window.addEventListener('DOMContentLoaded', function(){ window.open('member_registration_print.php?id=<?= $id ?>', '_blank'); });</script>
+<?php endif; ?>
 
 <?php layout_footer(); ?>
