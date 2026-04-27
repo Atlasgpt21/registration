@@ -1,0 +1,27 @@
+<?php
+/**
+ * Ρυθμίσεις εφαρμογής — αντιγράψτε σε config.php και τροποποιήστε.
+ *
+ * Σε production host (π.χ. Hostinger), αποθηκεύστε το config.php ΕΞΩ από το
+ * public_html για λόγους ασφαλείας. Ο bootstrap ψάχνει πρώτα στο APP_ROOT
+ * (τον φάκελο που περιέχει src/ + public/) και μετά στον parent του.
+ */
+
+return [
+    'db' => [
+        'host'     => '127.0.0.1',
+        'port'     => 3306,
+        'dbname'   => 'protocol_db',
+        'user'     => 'root',
+        'password' => 'root',
+        'charset'  => 'utf8mb4',
+    ],
+
+    'app' => [
+        'name'         => 'Πρωτόκολλο',
+        'timezone'     => 'Europe/Athens',
+        'session_name' => 'PROTO',
+        // Μορφή αριθμού πρωτοκόλλου: {YYYY}=έτος, {SEQ}=αύξων αριθμός
+        'protocol_format' => '{SEQ}/{YYYY}',
+    ],
+];
