@@ -20,7 +20,7 @@ function member_create(PDO $db, array $data): int
         $data['id_number'] ?: null,
         $data['tax_number'] ?: null,
         $data['amka'] ?: null,
-        $data['member_type'] ?? 'MEMBER',
+        $data['member_type'] ?: 'MEMBER',
         $data['address'] ?: null,
         $data['city'] ?: null,
         $data['postal_code'] ?: null,
@@ -30,7 +30,7 @@ function member_create(PDO $db, array $data): int
         $data['occupation'] ?: null,
         $data['role_in_club'] ?: null,
         $data['registration_date'] ?: null,
-        $data['status'] ?? 'ACTIVE',
+        $data['status'] ?: 'ACTIVE',
         $data['notes'] ?: null,
     ]);
     return (int)$db->lastInsertId();
@@ -57,7 +57,7 @@ function member_update(PDO $db, int $id, array $data): void
         $data['id_number'] ?: null,
         $data['tax_number'] ?: null,
         $data['amka'] ?: null,
-        $data['member_type'] ?? 'MEMBER',
+        $data['member_type'] ?: 'MEMBER',
         $data['address'] ?: null,
         $data['city'] ?: null,
         $data['postal_code'] ?: null,
@@ -67,7 +67,7 @@ function member_update(PDO $db, int $id, array $data): void
         $data['occupation'] ?: null,
         $data['role_in_club'] ?: null,
         $data['registration_date'] ?: null,
-        $data['status'] ?? 'ACTIVE',
+        $data['status'] ?: 'ACTIVE',
         $data['notes'] ?: null,
         $id,
     ]);

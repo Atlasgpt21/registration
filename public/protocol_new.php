@@ -24,8 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $format = $CFG['app']['protocol_format'] ?? '{SEQ}/{YYYY}';
-        $data['protocol_number'] = protocol_next_number($DB, $format);
-        $id = protocol_create($DB, $data);
+        $DB->beginTransaction();
+        try {
+            $data['protocol_number'] = protocol_next_number($DB, $format);
+            $id = protocol_create($DB, $data);
+            $DB->commit();
+        } catch (\Throwable $e) {
+            $DB->rollBack();
+            throw $e;
+        }
         flash_set('success', 'Η καταχώρηση αποθηκεύτηκε. Αρ. Πρωτ.: ' . $data['protocol_number']);
         redirect('protocol_view.php?id=' . $id);
     }

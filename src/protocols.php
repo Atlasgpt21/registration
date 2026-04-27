@@ -5,23 +5,15 @@ function protocol_next_number(PDO $db, string $format): string
 {
     $year = (int)date('Y');
 
-    $db->beginTransaction();
-    try {
-        $stmt = $db->prepare(
-            'INSERT INTO protocol_sequence (seq_year, last_number) VALUES (?, 1)
-             ON DUPLICATE KEY UPDATE last_number = last_number + 1'
-        );
-        $stmt->execute([$year]);
+    $stmt = $db->prepare(
+        'INSERT INTO protocol_sequence (seq_year, last_number) VALUES (?, 1)
+         ON DUPLICATE KEY UPDATE last_number = last_number + 1'
+    );
+    $stmt->execute([$year]);
 
-        $stmt = $db->prepare('SELECT last_number FROM protocol_sequence WHERE seq_year = ?');
-        $stmt->execute([$year]);
-        $seq = (int)$stmt->fetchColumn();
-
-        $db->commit();
-    } catch (\Throwable $e) {
-        $db->rollBack();
-        throw $e;
-    }
+    $stmt = $db->prepare('SELECT last_number FROM protocol_sequence WHERE seq_year = ?');
+    $stmt->execute([$year]);
+    $seq = (int)$stmt->fetchColumn();
 
     return str_replace(
         ['{YYYY}', '{YY}', '{SEQ}'],
