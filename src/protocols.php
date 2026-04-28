@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-function protocol_next_number(PDO $db, string $format): string
+function protocol_next_number(PDO $db, string $format, string $doc_date): string
 {
-    $year = (int)date('Y');
+    $year = (int)date('Y', strtotime($doc_date));
 
     $stmt = $db->prepare(
         'INSERT INTO protocol_sequence (seq_year, last_number) VALUES (?, 1)

@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $format = $CFG['app']['protocol_format'] ?? '{SEQ}/{YYYY}';
         $DB->beginTransaction();
         try {
-            $data['protocol_number'] = protocol_next_number($DB, $format);
+            $data['protocol_number'] = protocol_next_number($DB, $format, $data['doc_date']);
             $id = protocol_create($DB, $data);
             $DB->commit();
         } catch (\Throwable $e) {
