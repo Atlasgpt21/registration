@@ -12,7 +12,7 @@ $rows = member_list_all($DB, $filters);
 layout_print_header('Μητρώο Μελών');
 ?>
 
-<?php if (array_filter($filters)): ?>
+<?php if (array_filter($filters, fn($v) => $v !== '')): ?>
 <p class="text-muted small">
     Φίλτρα:
     <?php if ($filters['status']): ?> Κατάσταση: <?= member_status_label($filters['status']) ?> |<?php endif; ?>

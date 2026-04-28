@@ -14,7 +14,7 @@ $rows = protocol_list_all($DB, $filters);
 layout_print_header('Βιβλίο Πρωτοκόλλου');
 ?>
 
-<?php if (array_filter($filters)): ?>
+<?php if (array_filter($filters, fn($v) => $v !== '')): ?>
 <p class="text-muted small">
     Φίλτρα:
     <?php if ($filters['direction']): ?> Τύπος: <?= direction_label($filters['direction']) ?> |<?php endif; ?>

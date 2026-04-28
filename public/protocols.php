@@ -21,7 +21,7 @@ layout_header('Βιβλίο Πρωτοκόλλου', 'protocols');
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h4 class="mb-0"><i class="bi bi-journal-bookmark me-2"></i>Βιβλίο Πρωτοκόλλου</h4>
     <div>
-        <a href="protocols_print.php?<?= http_build_query(array_filter($filters)) ?>" target="_blank" class="btn btn-outline-secondary btn-sm me-1">
+        <a href="protocols_print.php?<?= http_build_query(array_filter($filters, fn($v) => $v !== '')) ?>" target="_blank" class="btn btn-outline-secondary btn-sm me-1">
             <i class="bi bi-printer me-1"></i>Εκτύπωση
         </a>
         <a href="protocol_new.php" class="btn btn-primary btn-sm">
@@ -112,7 +112,7 @@ layout_header('Βιβλίο Πρωτοκόλλου', 'protocols');
             <ul class="pagination pagination-sm justify-content-center mb-0">
                 <?php for ($p = 1; $p <= $totalPages; $p++): ?>
                     <li class="page-item <?= $p === $page ? 'active' : '' ?>">
-                        <a class="page-link" href="?<?= http_build_query(array_merge(array_filter($filters), ['page' => $p])) ?>"><?= $p ?></a>
+                        <a class="page-link" href="?<?= http_build_query(array_merge(array_filter($filters, fn($v) => $v !== ''), ['page' => $p])) ?>"><?= $p ?></a>
                     </li>
                 <?php endfor; ?>
             </ul>
