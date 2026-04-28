@@ -132,7 +132,7 @@ function member_list(PDO $db, array $filters = [], int $page = 1, int $perPage =
     }
     if (!empty($filters['search'])) {
         $where[]  = '(m.last_name LIKE ? OR m.first_name LIKE ? OR m.id_number LIKE ? OR m.tax_number LIKE ? OR m.amka LIKE ? OR m.phone LIKE ? OR m.mobile LIKE ? OR m.email LIKE ? OR m.member_number LIKE ?)';
-        $like     = '%' . $filters['search'] . '%';
+        $like     = '%' . escape_like($filters['search']) . '%';
         $params   = array_merge($params, [$like, $like, $like, $like, $like, $like, $like, $like, $like]);
     }
 
@@ -172,7 +172,7 @@ function member_list_all(PDO $db, array $filters = []): array
     }
     if (!empty($filters['search'])) {
         $where[]  = '(m.last_name LIKE ? OR m.first_name LIKE ? OR m.id_number LIKE ? OR m.tax_number LIKE ? OR m.amka LIKE ? OR m.phone LIKE ? OR m.mobile LIKE ? OR m.email LIKE ? OR m.member_number LIKE ?)';
-        $like     = '%' . $filters['search'] . '%';
+        $like     = '%' . escape_like($filters['search']) . '%';
         $params   = array_merge($params, [$like, $like, $like, $like, $like, $like, $like, $like, $like]);
     }
 

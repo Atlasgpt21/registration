@@ -16,8 +16,8 @@ function csrf_field(): string
 
 function csrf_verify(): void
 {
-    $token = $_POST['_csrf'] ?? '';
-    if (!hash_equals(csrf_token(), $token)) {
+    $token = (string)($_POST['_csrf'] ?? '');
+    if (!is_string($_POST['_csrf'] ?? '') || !hash_equals(csrf_token(), $token)) {
         http_response_code(403);
         echo 'Μη έγκυρο CSRF token. Ανανεώστε τη σελίδα και δοκιμάστε ξανά.';
         exit;

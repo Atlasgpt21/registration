@@ -112,7 +112,7 @@ function protocol_list(PDO $db, array $filters = [], int $page = 1, int $perPage
     }
     if (!empty($filters['search'])) {
         $where[]  = '(p.subject LIKE ? OR p.sender LIKE ? OR p.recipient LIKE ? OR p.protocol_number LIKE ? OR p.ref_number LIKE ?)';
-        $like     = '%' . $filters['search'] . '%';
+        $like     = '%' . escape_like($filters['search']) . '%';
         $params   = array_merge($params, [$like, $like, $like, $like, $like]);
     }
 
@@ -163,7 +163,7 @@ function protocol_list_all(PDO $db, array $filters = []): array
     }
     if (!empty($filters['search'])) {
         $where[]  = '(p.subject LIKE ? OR p.sender LIKE ? OR p.recipient LIKE ? OR p.protocol_number LIKE ? OR p.ref_number LIKE ?)';
-        $like     = '%' . $filters['search'] . '%';
+        $like     = '%' . escape_like($filters['search']) . '%';
         $params   = array_merge($params, [$like, $like, $like, $like, $like]);
     }
 

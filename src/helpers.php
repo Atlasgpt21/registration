@@ -61,3 +61,8 @@ function input(string $key, string $default = ''): string
 {
     return trim((string)($_POST[$key] ?? $_GET[$key] ?? $default));
 }
+
+function escape_like(string $s): string
+{
+    return str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $s);
+}
