@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 function protocol_next_number(PDO $db, string $format, string $doc_date): string
 {
-    $year = (int)date('Y', strtotime($doc_date));
+    $year = (int)substr($doc_date, 0, 4);
+    if ($year < 1900 || $year > 2100) {
+        $year = (int)date('Y');
+    }
 
     $stmt = $db->prepare(
         'INSERT INTO protocol_sequence (seq_year, last_number) VALUES (?, 1)
